@@ -19,13 +19,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Awaiting Approval
         uses: trstringer/manual-approval@v1
+        timeout-minutes: 60
         with:
           secret: ${{ secrets.GH_PAT }}
-          timeout-minutes: 60
           approvers: nurimansyah89
           minimum-approvals: 1
-          issue-title: Request Pipeline for v$PIPELINE_VER
-          issue-body: Please use keyword "approve" or "deny"
       - name: Example action
         run: ./sample.sh
         
