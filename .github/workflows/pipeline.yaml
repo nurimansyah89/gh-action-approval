@@ -20,7 +20,8 @@ jobs:
       - name: Awaiting Approval
         uses: trstringer/manual-approval@v1
         with:
-          secret: ${{ github.TOKEN }}
+          secret: ${{ secrets.GH_PAT }}
+          timeout-minutes: 60
           approvers: nurimansyah89
           minimum-approvals: 1
           issue-title: Request Pipeline for v$PIPELINE_VER
