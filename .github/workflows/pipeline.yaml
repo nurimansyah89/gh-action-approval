@@ -9,10 +9,22 @@ on:
     branches:
       - main
 
+env:
+  PIPELINE_VER: 1.0.0
+
 jobs:
   sample-job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Awaiting Approval
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: nurimansyah89
+          minimum-approvals: 1
+          issue-title: Request Pipeline for v$PIPELINE_VER
+          issue-body: Please use keyword "approve" or "deny"
       - name: Example action
         run: ./sample.sh
+        
