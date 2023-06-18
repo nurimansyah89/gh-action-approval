@@ -9,10 +9,21 @@ on:
     branches:
       - main
 
+env:
+  PIPELINE_VER: 1.0.0
+
 jobs:
   sample-job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Awaiting Approval
+        uses: trstringer/manual-approval@v1
+        timeout-minutes: 60
+        with:
+          secret: ${{ secrets.GH_PAT }}
+          approvers: nurimansyah89
+          minimum-approvals: 1
       - name: Example action
         run: ./sample.sh
+        
